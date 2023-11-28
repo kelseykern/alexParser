@@ -15,3 +15,7 @@ python ./master_parser.py
 - git add *
 - git commit -m "your message"
 - git push
+
+# to pull changes
+git pull
+(if problems, first do git checkout *)
