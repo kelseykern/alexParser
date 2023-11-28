@@ -53,9 +53,9 @@ def evaluate_document(document_text):
     
     return results
 
-#RESUME_FOLDER = "C:\Users\jalex\Desktop\Immigration Campaign\Resumes"
+RESUME_FOLDER = "C:\Users\jalex\Desktop\Immigration Campaign\Resumes"
 #RESUME_FOLDER = "/c/Users/jalex/Desktop/Immigration Campaign/Resumes"
-RESUME_FOLDER = "./Resume_Samples"
+#RESUME_FOLDER = "./Resume_Samples"
 #RESUME_FOLDER = "C:\Resume_Samples"
 
 # Function to process each document and update the spreadsheet
