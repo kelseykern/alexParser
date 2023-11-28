@@ -1,67 +1,64 @@
 import os
-import datetime
 from openpyxl import Workbook
 import docxpy
 
+##################### FUNCTIONS ##############################
+
 # Function to evaluate each question for a document
 def evaluate_document(document_text):
-    # Modify the logic as needed for each question
+    document_text = document_text.lower()
     results = [
-        "SOLID" in document_text and 
-        "RESTUL" in document_text and 
-        ("OOP" in document_text or "object oriented" in document_text),
+        "solid" in document_text and 
+        "restful" in document_text and 
+        ("oop" in document_text or "object oriented" in document_text),
 
-        "Azure" in document_text or 
-        "AWS" in document_text or 
-        "OOP" in document_text or 
+        "azure" in document_text or 
+        "aws" in document_text or 
+        "oop" in document_text or 
         "object oriented" in document_text or 
         "dependency injection" in document_text,
 
-        "Debug" in document_text or 
+        "debug" in document_text or 
         "troubleshoot" in document_text or 
         "diagnose" in document_text or 
         "improve" in document_text,
 
         ".net" in document_text and 
         "c#" in document_text and 
-        "SQL" in document_text and 
-        "Azure" in document_text,
+        "sql" in document_text and 
+        "azure" in document_text,
 
-        "Leadership" in document_text or 
+        "leadership" in document_text or 
         "mentorship" in document_text,
 
         "visual studio" in document_text or 
         "visual basic" in document_text or 
-        "GIT" in document_text,
+        "git" in document_text,
 
-        "Agile" in document_text or 
+        "agile" in document_text or 
         "scrum" in document_text or 
-        "CI/CD" in document_text,
+        "ci/cd" in document_text,
 
-        "Design" in document_text or 
-        "Concept" in document_text,  # Assuming case-insensitive matching for "Design" and "Concept"
+        "design" in document_text or 
+        "concept" in document_text,
 
-        "Github" in document_text or 
-        "Gitlab" in document_text or 
+        "github" in document_text or 
+        "gitlab" in document_text or 
         "bitbucket" in document_text or 
-        "Jira" in document_text or 
-        "Asana" in document_text or 
-        "Trello" in document_text,
+        "jira" in document_text or 
+        "asana" in document_text or 
+        "trello" in document_text,
 
         any(keyword in document_text.lower() for keyword in ["manage", "management", "manager"]) and "project" in document_text
     ]
     
     return results
 
-#RESUME_FOLDER = "C:\Users\jalex\Desktop\Immigration Campaign\Resumes"
-RESUME_FOLDER = "./Resume_Samples"
-
 # Function to process each document and update the spreadsheet
 def process_documents(documents_folder, output_file):
 
     wb = Workbook()
     ws = wb.active
-    # Rows can also be appended
     ws.append(["filename", 
                "solid, restful, oop", 
                "azure, aws, oop", 
@@ -75,47 +72,23 @@ def process_documents(documents_folder, output_file):
                "management, project"])
     # Save the file
     wb.save(excel_output_file)
-
-    #file1 = open(output_file, "w")
-    #file1.writelines("Results\n")
-    #file1.writelines([ "filename", 
-    #                   "solid, restful, oop", 
-    #                   "azure, aws, oop", 
-    #                   "debug, troubleshoot, improve, diagnose", 
-    #                   ".net, c#, sql, azure", 
-    #                   "leadership, mentorship", 
-    #                   "visual studio, visual basic, git",
-    #                   "agile, scrum, cicd", 
-    #                   "design, concept", 
-    #                   "github, gitlab, bitbucket, jira, asana, trello"])
-    #file1.writelines("\n")
-    #file1.close()
     
     # Iterate through each document in the folder
     for filename in os.listdir(documents_folder):
-        if filename.endswith(".docx"):  # Assuming the documents are text files
-            #with open(os.path.join(documents_folder, filename), "r") as file:
-            #   document_text = file.read()
+        if filename.endswith(".docx"):
             document_text = docxpy.process(documents_folder+"/"+filename)
-            
-            # Evaluate each question for the document
             results = [filename] + evaluate_document(document_text)
             print(results)
-            #file1 = open(output_file, "a")
-            #file1.writelines(str(results))
-            #file1.writelines("\n")
-            #file1.close()
-
             ws.append(results)
-            # Save the file
             wb.save(excel_output_file)
 
-# Specify the folder containing the documents and the output file
-documents_folder = RESUME_FOLDER
-#output_file = "output.csv"
+
+##################### MAIN CODE ##############################
+
+#documents_folder = "C:\Users\jalex\Desktop\Immigration Campaign\Resumes"
+documents_folder = "./Resume_Samples"
 excel_output_file = "excel_output_file.xlsx"
 
-# Process the documents and update the spreadsheet
 process_documents(documents_folder, excel_output_file)
 
 print(f"Results saved to {excel_output_file}")
