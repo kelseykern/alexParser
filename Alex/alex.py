@@ -28,6 +28,11 @@ gith = "no"
 #Manage* near project
 manag = "no"
 
+
+#RESUME_FOLDER = "C:\Users\jalex\Desktop\Immigration Campaign\Resumes"
+#RESUME_FOLDER = "/c/Users/jalex/Desktop/Immigration Campaign/Resumes"
+RESUME_FOLDER = "./Resume_Samples"
+
 with open('test_file.txt','r') as file:
   
     # reading each line    

@@ -1,0 +1,4 @@
+SOLID
+RESTUL
+OOP
+object oriented
