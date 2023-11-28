@@ -4,6 +4,7 @@
 pip install pandas
 pip install openpyxl
 pip3 install openpyxl
+pip install docxpy
 
 # then type in command line: 
 python ./master_parser.py

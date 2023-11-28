@@ -1,6 +1,7 @@
 import os
 import datetime
 from openpyxl import Workbook
+import docxpy
 
 # Function to evaluate each question for a document
 def evaluate_document(document_text):
@@ -52,9 +53,9 @@ def evaluate_document(document_text):
     
     return results
 
-RESUME_FOLDER = "C:\Users\jalex\Desktop\Immigration Campaign\Resumes"
+#RESUME_FOLDER = "C:\Users\jalex\Desktop\Immigration Campaign\Resumes"
 #RESUME_FOLDER = "/c/Users/jalex/Desktop/Immigration Campaign/Resumes"
-#RESUME_FOLDER = "./Resume_Samples"
+RESUME_FOLDER = "./Resume_Samples"
 #RESUME_FOLDER = "C:\Resume_Samples"
 
 # Function to process each document and update the spreadsheet
@@ -94,9 +95,10 @@ def process_documents(documents_folder, output_file):
     
     # Iterate through each document in the folder
     for filename in os.listdir(documents_folder):
-        if filename.endswith(".txt"):  # Assuming the documents are text files
-            with open(os.path.join(documents_folder, filename), "r") as file:
-                document_text = file.read()
+        if filename.endswith(".docx"):  # Assuming the documents are text files
+            #with open(os.path.join(documents_folder, filename), "r") as file:
+            #   document_text = file.read()
+            document_text = docxpy.process(documents_folder+"/"+filename)
             
             # Evaluate each question for the document
             results = [filename] + evaluate_document(document_text)
