@@ -1,7 +1,6 @@
 # to run open command line (ctrl `)
 
 # install deps
-pip install pandas
 pip install openpyxl
 pip3 install openpyxl
 pip install docxpy

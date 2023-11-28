@@ -1,4 +1,0 @@
-Hello my name is Ronald
-I am a 3rd degree black belt in chung foo
-I love to play clarinet and write in .net language
-I also like C++ sometimes and C
