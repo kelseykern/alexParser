@@ -97,8 +97,8 @@ def process_documents(documents_folder, output_file):
 
 ##################### MAIN CODE ##############################
 
-#documents_folder = "C:\Users\jalex\Desktop\Immigration Campaign\Resumes"
-documents_folder = "./Resume_Samples"
+documents_folder = "C:/Users/jalex/Desktop/Immigration_Campaign/Resumes"
+#documents_folder = "./Resume_Samples"
 excel_output_file = "excel_output_file.xlsx"
 
 process_documents(documents_folder, excel_output_file)
