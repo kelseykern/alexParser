@@ -1,5 +1,6 @@
 import os
 from openpyxl import Workbook
+from PyPDF2 import PdfReader
 import docxpy
 
 ##################### FUNCTIONS ##############################
@@ -77,10 +78,16 @@ def process_documents(documents_folder, output_file):
     for filename in os.listdir(documents_folder):
         if filename.endswith(".docx"):
             document_text = docxpy.process(documents_folder+"/"+filename)
-            results = [filename] + evaluate_document(document_text)
-            print(results)
-            ws.append(results)
-            wb.save(excel_output_file)
+        if filename.endswith(".pdf"):   
+            reader = PdfReader(documents_folder+"/"+filename) 
+            num_pages = len(reader.pages)
+            # to-do: update to check all pages
+            page = reader.pages[0]
+            document_text = page.extract_text() 
+        results = [filename] + evaluate_document(document_text)
+        print(results)
+        ws.append(results)
+        wb.save(excel_output_file)       
 
 
 ##################### MAIN CODE ##############################
