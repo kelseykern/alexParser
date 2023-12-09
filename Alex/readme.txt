@@ -9,6 +9,7 @@ pip install pycryptodome==3.15.0
 
 
 # then type in command line: 
+cd Alex
 python ./master_parser.py
 
 

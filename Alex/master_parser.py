@@ -1,4 +1,5 @@
 import os
+import sys
 from openpyxl import Workbook
 from PyPDF2 import PdfReader
 import docxpy
@@ -101,6 +102,15 @@ documents_folder = "C:/Users/jalex/Desktop/Immigration_Campaign/Resumes"
 #documents_folder = "./Resume_Samples"
 excel_output_file = "excel_output_file.xlsx"
 
-process_documents(documents_folder, excel_output_file)
+user_path = ""
+path_exists = 0
+while path_exists == 0:
+    print("No valid path entered. ")
+    user_path = input("Please enter the full path of where the resumes are located (eg. C:/Resumes ): ")
+    path_exists = os.path.exists(user_path)
 
+print("Checking resumes in path: " + user_path)
+documents_folder = user_path
+    
+process_documents(documents_folder, excel_output_file)
 print(f"Results saved to {excel_output_file}")
