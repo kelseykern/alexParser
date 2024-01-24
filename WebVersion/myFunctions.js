@@ -37,3 +37,17 @@ let filters = [
                 ["project"]
               ]
             ];
+
+function runFilter(){
+let filters = document.getElementById("FilterBodyArea");
+
+// build children
+var children = [].slice.call(filters.getElementsByTagName('input'),0);
+// build ids and classes
+var ids = children.map(function(child) {
+   return JSON.stringify({ id: child.id});
+});
+
+alert("Filtering for: "+ids);
+}
+
