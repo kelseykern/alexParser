@@ -1,6 +1,7 @@
 # cd C:/Users/jalex/Documents/GitHub/alexParser
 # this path has 2 folders: Alex and WebVersion
 
+### python directions
 # to run open command line (ctrl `)
 
 # install deps
@@ -16,6 +17,11 @@ cd Alex
 python ./master_parser.py
 
 
+### html directions
+double click index.html (should open up a browser window)
+
+
+### Git directions
 # to make changes
 - edit and save files
 - git add *
