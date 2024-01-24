@@ -1,3 +1,6 @@
+# cd C:/Users/jalex/Documents/GitHub/alexParser
+# this path has 2 folders: Alex and WebVersion
+
 # to run open command line (ctrl `)
 
 # install deps
