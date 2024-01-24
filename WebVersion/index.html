@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="myStyle.css">
+    <script src="myFunctions.js"></script>
 </head>
 
 <body>
@@ -22,21 +23,19 @@
         </div>
 
 
-        <div style="background-color:aliceblue; padding: 10px;">
-            <input type="checkbox" id="filter1" name="filter1" value="filter1">
-            <label for="filter1"> solid AND restful</label><br>
+        <div id="FilterBodyArea" style="background-color:aliceblue; padding: 10px;">
 
-            <input type="checkbox" id="filter2" name="filter2" value="filter2">
-            <label for="filter2"> azure OR aws</label><br>
 
-            <input type="checkbox" id="filter3" name="filter3" value="filter3">
-            <label for="filter3"> debug OR troubleshoot OR diagnose</label><br>
+            <!-- filters will appear here -->
+
+
+
         </div>
         <button type="submit" id="submit_button" name="submit_button"> Filter Documents </button>
     </div>
 
 
-
+    <script src="myEventListeners.js"></script>
 </body>
 
 </html>
