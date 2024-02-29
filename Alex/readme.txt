@@ -10,7 +10,7 @@ pip install openpyxl
 pip install docxpy
 pip install PyPDF2
 pip install pycryptodome==3.15.0
-
+pip install tk
 
 # then type in command line: 
 cd Alex
