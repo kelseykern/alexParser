@@ -100,8 +100,8 @@ def process_documents(documents_folder, output_file):
 ##################### MAIN CODE ##############################
 
 #documents_folder = "C:/Users/jalex/Desktop/Immigration_Campaign/Resumes"
-##documents_folder = "./Resume_Samples"
-#excel_output_file = "excel_output_file.xlsx"
+documents_folder = "./Resume_Samples"
+excel_output_file = "excel_output_file.xlsx"
 #
 #user_path = ""
 #path_exists = 0
@@ -154,3 +154,11 @@ Radiobutton(root, text='MIT', variable=v, value=2).grid(row=5, sticky=W)
 
 #run ui
 root.mainloop()
+
+
+
+
+
+
+
+
