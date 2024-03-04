@@ -24,12 +24,17 @@ def main1():
     check2 = Checkbutton(root, text='restful', variable=var2)
     check2.grid(row=4, sticky=W)
 
+    var3 = IntVar()
+    check3 = Checkbutton(root, text='oop or object oriented', variable=var2)
+    check3.grid(row=5, sticky=W)
 
     # create the button that gets the input and runs function
     output = Button(root, text="Run parser", 
                     command=lambda: analyze_with_filters(str(path_input.get("1.0", 'end-1c')),
-                                                         var1.get(), var2.get()))
-    output.grid(row=2, sticky=W)
+                                                         var1.get(), 
+                                                         var2.get()
+                                                         ))
+    output.grid(row=6, sticky=W)
 
     root.mainloop()
 

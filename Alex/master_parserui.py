@@ -5,75 +5,92 @@ from PyPDF2 import PdfReader
 import docxpy
 from tkinter import * #Tkinter GUI
 
+conditions_array = [
+    [
+      ["solid"],
+      ["restful"],
+      ["oop","object oriented"]
+    ],
+    [
+      ["azure", "aws", "oop", "object oriented", "dependency injection"]
+    ],
+    [
+      ["debug", "troubleshoot", "diagnose", "improve"]
+    ],
+    [
+      [".net"],
+      ["c#"],
+      ["sql"],
+      ["azure"]
+    ],
+    [
+      ["leadership", "mentorship"]         
+    ],
+    [
+      ["visual studio", "visual basic", "git"]
+    ],
+    [
+      ["agile", "scrum", "ci/cd"]
+    ],
+    [
+      ["design", "concept"]        
+    ],
+    [
+      ["github", "gitlab", "bitbucket", "jira",  "asana", "trello"]        
+    ],
+    [
+       ["manage", "management", "manager"],
+       ["project"]
+    ]
+]
 ##################### FUNCTIONS ##############################
 
 # Function to evaluate each question for a document
 def evaluate_document(document_text):
     document_text = document_text.lower()
-    results = [
-        "solid" in document_text and 
-        "restful" in document_text and 
-        ("oop" in document_text or "object oriented" in document_text),
 
-        "azure" in document_text or 
-        "aws" in document_text or 
-        "oop" in document_text or 
-        "object oriented" in document_text or 
-        "dependency injection" in document_text,
+    # conditions_array = array of conditions
+    # condition = array of requirements (all requirements must be fulfilled for the condition to be fulfilled)
+    # requirement = list of strings (must contain atleast 1 string from list)
+    results = []
+    for condition in conditions_array:
+        # need to fulfill every requirement for condition to be marked true
+        for req in condition:
+            req_fulfilled = False
+            # need to match atleast 1 word in req array
+            for word in req:
+                if word in document_text:
+                    req_fulfilled = True
+                    break
+            if req_fulfilled == False:
+                break
 
-        "debug" in document_text or 
-        "troubleshoot" in document_text or 
-        "diagnose" in document_text or 
-        "improve" in document_text,
+        results.append(req_fulfilled)
 
-        ".net" in document_text and 
-        "c#" in document_text and 
-        "sql" in document_text and 
-        "azure" in document_text,
-
-        "leadership" in document_text or 
-        "mentorship" in document_text,
-
-        "visual studio" in document_text or 
-        "visual basic" in document_text or 
-        "git" in document_text,
-
-        "agile" in document_text or 
-        "scrum" in document_text or 
-        "ci/cd" in document_text,
-
-        "design" in document_text or 
-        "concept" in document_text,
-
-        "github" in document_text or 
-        "gitlab" in document_text or 
-        "bitbucket" in document_text or 
-        "jira" in document_text or 
-        "asana" in document_text or 
-        "trello" in document_text,
-
-        any(keyword in document_text.lower() for keyword in ["manage", "management", "manager"]) and "project" in document_text
-    ]
-    
     return results
+
 
 # Function to process each document and update the spreadsheet
 def process_documents(documents_folder, output_file):
 
     wb = Workbook()
     ws = wb.active
-    ws.append(["filename", 
-               "solid, restful, oop", 
-               "azure, aws, oop", 
-               "debug, troubleshoot, improve, diagnose", 
-               ".net, c#, sql, azure", 
-               "leadership, mentorship", 
-               "visual studio, visual basic, git",
-               "agile, scrum, cicd", 
-               "design, concept", 
-               "github, gitlab, bitbucket, jira, asana, trello",
-               "management, project"])
+    
+    headers = []
+    headers.append("filename")
+    for condition in conditions_array:
+        title = ""
+        for index, req in enumerate(condition):
+            title = title + "["
+            for i, word in enumerate(req):
+               if i == 0: title = title + word
+               else: title = title + " OR " + word
+            title = title + "]"
+            if index != len(condition)-1: title = title + " AND "
+        headers.append(title)       
+
     # Save the file
+    ws.append(headers)
     wb.save(excel_output_file)
     
     # Iterate through each document in the folder
@@ -113,52 +130,8 @@ excel_output_file = "excel_output_file.xlsx"
 #print("Checking resumes in path: " + user_path)
 #documents_folder = user_path
 #    
-#process_documents(documents_folder, excel_output_file)
-#print(f"Results saved to {excel_output_file}")
-
-##############################################################
-
-#instantiate ui
-root = Tk() #where r is the name of the main window object
-
-#widgets
-var1 = IntVar()
-Checkbutton(root, text='male', variable=var1).grid(row=0, sticky=W)
-var2 = IntVar()
-Checkbutton(root, text='female', variable=var2).grid(row=1, sticky=W)
-Label(root, text='First Name').grid(row=2)
-e1 = Entry(root)
-e1.grid(row=2, column=1)
-Label(root, text='Last Name').grid(row=3)
-e2 = Entry(root)
-e2.grid(row=3, column=1)
-
-v = IntVar()
-#Radiobutton(root, text='GfG', variable=v, value=1).pack(anchor=W)
-#Radiobutton(root, text='MIT', variable=v, value=2).pack(anchor=W)
-Radiobutton(root, text='GfG', variable=v, value=1).grid(row=4, sticky=W)
-Radiobutton(root, text='MIT', variable=v, value=2).grid(row=5, sticky=W)
-
-#bottomframe = Frame(root)
-#bottomframe.pack( side = BOTTOM )
-#
-#blackbutton = Button(bottomframe, text ='Black', fg ='black')
-#blackbutton.pack( side = BOTTOM)
-
-#Lb = Listbox(root)
-#Lb.insert(1, 'Python')
-#Lb.insert(2, 'Java')
-#Lb.insert(3, 'C++')
-#Lb.insert(4, 'Any other')
-#Lb.pack()
-
-#run ui
-root.mainloop()
-
-
-
-
-
+process_documents(documents_folder, excel_output_file)
+print(f"Results saved to {excel_output_file}")
 
 
 
