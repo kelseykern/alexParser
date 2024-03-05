@@ -3,6 +3,7 @@ import sys
 from openpyxl import Workbook
 from PyPDF2 import PdfReader
 import docxpy
+import re
 from tkinter import * #Tkinter GUI
 check_button_array = dict()
 excel_output_file = "excel_output_file.xlsx"
@@ -151,13 +152,28 @@ def create_grid_condition(i,condition):
 
 def add_condition(condition_string):
     global conditions_array
-    new_condition = [[condition_string],["solid","restful"]]
-    print("add condition",new_condition)
+    #separate into ANDs
+    and_array = condition_string.split(" AND ")
+    
+    new_condition = []
+    for or_string in and_array: 
+        idx1 = or_string.index('[')
+        idx2 = or_string.index(']')
+        or_string = or_string[idx1 + 1: idx2]
+
+        or_array = or_string.split(" OR ")
+        new_condition.append(or_array)
+
+    #pattern = re.compile(r'\[(.+?)\]')
+    #new_condition = pattern.findall(condition_string)
+    #new_condition = [  [ condition_string ] , ["solid","restful"]   ]
+    #new_condition = [new_condition]
 
     conditions_array.append(new_condition)
-
     create_grid_condition((len(conditions_array)-1), conditions_array[len(conditions_array)-1])
 
+    print(conditions_array)
+    print("@@@@@@@@@@@@@@@@@@@@@@@")
 ############################## MAIN CODE ##############################
 
 def main1():
