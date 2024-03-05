@@ -158,37 +158,41 @@ def add_condition():
     create_grid_condition((len(conditions_array)-1), conditions_array[len(conditions_array)-1])
 ##################### MAIN CODE ##############################
 
-
-howto_label = Label( root, text="enter path of resumes below then press button")
-howto_label.grid(row=row_count, sticky=W, padx=10, pady=10) 
-row_count+=1
-
-path_input = Text(root, height=1, width=49)
-path_input.grid(row=row_count, sticky=W, padx=10, pady=10) 
-row_count+=1
-
-#check_button_array.clear()
-#check_button_array = dict()
-
-for i, condition in enumerate(conditions_array):
-    create_grid_condition(i, condition)
+def main1():
+    global row_count
+    global conditions_array
+    #global check_button_array
+    howto_label = Label( root, text="enter path of resumes below then press button")
+    howto_label.grid(row=row_count, sticky=W, padx=10, pady=10) 
     row_count+=1
+    
+    path_input = Text(root, height=1, width=49)
+    path_input.grid(row=row_count, sticky=W, padx=10, pady=10) 
+    row_count+=1
+    
+    
+    for i, condition in enumerate(conditions_array):
+        create_grid_condition(i, condition)
+        row_count+=1
+    
+    new_condition_button = Button(root, text="add condition", command=lambda: add_condition())
+    new_condition_button.grid(row=row_count, sticky=W, padx=10, pady=10) 
+    row_count+=1
+    
+    # create the button that gets the input and runs function
+    output = Button(root, text="Run parser", 
+                    command=lambda: process_documents(str(path_input.get("1.0", 'end-1c')),
+                                                         excel_output_file
+                                                         ))
+    output.grid(row=row_count, sticky=W, padx=10, pady=10) 
+    row_count+=1
+    
+    root.mainloop()
+    
+    print(f"Results saved to {excel_output_file}")
 
-new_condition_button = Button(root, text="add condition", command=lambda: add_condition())
-new_condition_button.grid(row=row_count, sticky=W, padx=10, pady=10) 
-row_count+=1
-
-# create the button that gets the input and runs function
-output = Button(root, text="Run parser", 
-                command=lambda: process_documents(str(path_input.get("1.0", 'end-1c')),
-                                                     excel_output_file
-                                                     ))
-output.grid(row=row_count, sticky=W, padx=10, pady=10) 
-row_count+=1
-
-root.mainloop()
-
-print(f"Results saved to {excel_output_file}")
+if __name__ == '__main__':
+    main1()
 
 
 
