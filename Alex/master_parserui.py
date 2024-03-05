@@ -9,13 +9,16 @@ from tkinter import * #Tkinter GUI
 
 # Function to evaluate each question for a document
 def evaluate_document(document_text, conditions_array):
+
     document_text = document_text.lower()
 
     # conditions_array = array of conditions
     # condition = array of requirements (all requirements must be fulfilled for the condition to be fulfilled)
     # requirement = list of strings (must contain atleast 1 string from list)
     results = []
-    for condition in conditions_array:
+    for i, condition in enumerate(conditions_array):
+        #check if this checkbox was ticked
+
         # need to fulfill every requirement for condition to be marked true
         for req in condition:
             req_fulfilled = False
@@ -34,7 +37,6 @@ def evaluate_document(document_text, conditions_array):
 
 # Function to process each document and update the spreadsheet
 def process_documents(documents_folder, output_file, conditions_array):
-
     # create an excel object
     wb = Workbook()
     ws = wb.active
@@ -57,7 +59,7 @@ def process_documents(documents_folder, output_file, conditions_array):
         if filename.endswith(".docx"):
             document_text = docxpy.process(documents_folder+"/"+filename)
             results = [filename] + evaluate_document(document_text, conditions_array)
-            print(results)
+            #print(results)
             ws.append(results)
             wb.save(excel_output_file) 
         if filename.endswith(".pdf"):   
@@ -67,7 +69,7 @@ def process_documents(documents_folder, output_file, conditions_array):
             page = reader.pages[0]
             document_text = page.extract_text() 
             results = [filename] + evaluate_document(document_text, conditions_array)
-            print(results)
+            #print(results)
             ws.append(results)
             wb.save(excel_output_file) 
         if filename.endswith(".txt"): 
@@ -83,6 +85,7 @@ def stringify_condition(condition):
         condition_string = condition_string + "]"
         if index != len(condition)-1: condition_string = condition_string + " AND "
     return condition_string
+
 
 ##################### MAIN CODE ##############################
 
@@ -131,11 +134,11 @@ root = Tk()
 row_count = 0
 
 howto_label = Label( root, text="enter path of resumes below then press button")
-howto_label.grid(row=row_count, sticky=W)
+howto_label.grid(row=row_count, sticky=W, padx=10, pady=10) 
 row_count+=1
 
 path_input = Text(root, height=1, width=49)
-path_input.grid(row=row_count, sticky=W)
+path_input.grid(row=row_count, sticky=W, padx=10, pady=10) 
 row_count+=1
 
 for i, condition in enumerate(conditions_array):
@@ -143,7 +146,7 @@ for i, condition in enumerate(conditions_array):
     condition_string = stringify_condition(condition)
 
     check_var = Checkbutton(root, text=condition_string, variable=temp_var)
-    check_var.grid(row=row_count, sticky=W)
+    check_var.grid(row=row_count, sticky=W, padx=10, pady=10) 
     row_count+=1
 
 # create the button that gets the input and runs function
@@ -152,7 +155,7 @@ output = Button(root, text="Run parser",
                                                      excel_output_file, 
                                                      conditions_array
                                                      ))
-output.grid(row=row_count, sticky=W)
+output.grid(row=row_count, sticky=W, padx=10, pady=10) 
 row_count+=1
 
 root.mainloop()
