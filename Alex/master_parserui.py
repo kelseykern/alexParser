@@ -4,7 +4,7 @@ from openpyxl import Workbook
 from PyPDF2 import PdfReader
 import docxpy
 from tkinter import * #Tkinter GUI
-
+check_button_array = dict()
 ##################### FUNCTIONS ##############################
 
 # Function to evaluate each question for a document
@@ -18,6 +18,11 @@ def evaluate_document(document_text, conditions_array):
     results = []
     for i, condition in enumerate(conditions_array):
         #check if this checkbox was ticked
+        global check_button_array
+        box = check_button_array.get(i)
+        box_val = box.get()
+        if box_val == 0: continue
+
 
         # need to fulfill every requirement for condition to be marked true
         for req in condition:
@@ -44,7 +49,14 @@ def process_documents(documents_folder, output_file, conditions_array):
     # create headers array
     headers = []
     headers.append("filename")
-    for condition in conditions_array:
+    for i, condition in enumerate(conditions_array):
+        #check if this checkbox was ticked
+        global check_button_array
+        box = check_button_array.get(i)
+        box_val = box.get()
+        if box_val == 0: continue
+
+
         title = stringify_condition(condition)
         headers.append(title)       
 
@@ -86,7 +98,10 @@ def stringify_condition(condition):
         if index != len(condition)-1: condition_string = condition_string + " AND "
     return condition_string
 
-
+#def Readstatus(key):
+#        box = check_button_array.get(key)
+#        box_val = box.get()
+#        #print(box_val)
 ##################### MAIN CODE ##############################
 
 conditions_array = [
@@ -141,12 +156,17 @@ path_input = Text(root, height=1, width=49)
 path_input.grid(row=row_count, sticky=W, padx=10, pady=10) 
 row_count+=1
 
+#check_button_array.clear()
+#check_button_array = dict()
 for i, condition in enumerate(conditions_array):
-    temp_var = IntVar()
+    #temp_var = IntVar()
+    check_button_array[i] = IntVar()
+
     condition_string = stringify_condition(condition)
 
-    check_var = Checkbutton(root, text=condition_string, variable=temp_var)
-    check_var.grid(row=row_count, sticky=W, padx=10, pady=10) 
+    check_button = Checkbutton(root, text=condition_string, variable=check_button_array[i]) #, command=lambda key=i: Readstatus(key))
+    check_button.grid(row=row_count, sticky=W, padx=10, pady=10) 
+    #check_button_array.append(check_button)
     row_count+=1
 
 # create the button that gets the input and runs function
