@@ -46,7 +46,8 @@ conditions_array = [
        ["project"]
     ]
 ]
-##################### FUNCTIONS ##############################
+
+############################## FUNCTIONS ##############################
 
 # Function to evaluate each question for a document
 def evaluate_document(document_text):
@@ -156,7 +157,8 @@ def add_condition():
     conditions_array.append(new_condition)
 
     create_grid_condition((len(conditions_array)-1), conditions_array[len(conditions_array)-1])
-##################### MAIN CODE ##############################
+
+############################## MAIN CODE ##############################
 
 def main1():
     global row_count
