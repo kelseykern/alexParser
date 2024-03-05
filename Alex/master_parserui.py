@@ -149,9 +149,9 @@ def create_grid_condition(i,condition):
     check_button = Checkbutton(root, text=condition_string, variable=check_button_array[i]) #, command=lambda key=i: Readstatus(key))
     check_button.grid(row=row_num, sticky=W, padx=10, pady=10) 
 
-def add_condition():
+def add_condition(condition_string):
     global conditions_array
-    new_condition = [["hello"],["Im","new"]]
+    new_condition = [[condition_string],["solid","restful"]]
     print("add condition",new_condition)
 
     conditions_array.append(new_condition)
@@ -172,15 +172,18 @@ def main1():
     path_input.grid(row=row_count, sticky=W, padx=10, pady=10) 
     row_count+=1
     
-    
     for i, condition in enumerate(conditions_array):
         create_grid_condition(i, condition)
         row_count+=1
     
-    new_condition_button = Button(root, text="add condition", command=lambda: add_condition())
+    condition_input = Text(root, height=1, width=49)
+    condition_input.grid(row=row_count, sticky=W, padx=10, pady=10) 
+    row_count+=1
+
+    new_condition_button = Button(root, text="add condition", command=lambda: add_condition(str(condition_input.get("1.0", 'end-1c'))))
     new_condition_button.grid(row=row_count, sticky=W, padx=10, pady=10) 
     row_count+=1
-    
+
     # create the button that gets the input and runs function
     output = Button(root, text="Run parser", 
                     command=lambda: process_documents(str(path_input.get("1.0", 'end-1c')),
