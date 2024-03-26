@@ -1,33 +1,36 @@
-# cd C:/Users/jalex/Documents/GitHub/alexParser
-# this path has 2 folders: Alex and WebVersion
 
-### python directions
-# to run open command line (ctrl `)
+# python directions
+### to run open command line in vscode (ctrl `)
 
-# install deps
+### install deps
+```
 pip install openpyxl
 #pip3 install openpyxl
 pip install docxpy
 pip install PyPDF2
 pip install pycryptodome==3.15.0
 pip install tk
+```
 
-# then type in command line: 
+### then type in command line: 
+```
+cd C:/Users/jalex/Documents/GitHub/alexParser/
 cd Alex
 python ./master_parser.py
+```
 
 
-### html directions
-double click index.html (should open up a browser window)
 
+# Git directions
+### to make changes (edit and save files)
+```
+git add *
+git commit -m "your message"
+git push
+```
 
-### Git directions
-# to make changes
-- edit and save files
-- git add *
-- git commit -m "your message"
-- git push
-
-# to pull changes
+### to pull changes
+```
 git pull
 (if problems, first do git checkout *)
+```
