@@ -84,7 +84,7 @@ def process_documents(documents_folder, output_file):
 
 ##################### MAIN CODE ##############################
 
-documents_folder = "H:\Campaign Shashank\Resumes\Resumes"
+documents_folder = "H:\Campaign Sharktank\Resumes\Resumes"
 #documents_folder = "./Resume_Samples"
 excel_output_file = "excel_output_file.xlsx"
 
